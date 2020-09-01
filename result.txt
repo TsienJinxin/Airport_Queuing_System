@@ -1,0 +1,205 @@
+Thank you for using our airport security queuing system.
+Here is something you should before using it.
+
+First,you should choose a way to input the config first, by the keyboard or files.
+
+Second,while the program is running,you can input some commands to conntrol it.
+G means a passenger applies to enter the buffer.
+RX(X is an integer between 1 and 8) means check point X applies to rest.
+CX(X is an integer between 1 and 8) means check point X applies to resume work.
+And Q means it's off duty now,and no one can enter the buffer.
+You can input many orders at the same time,which you only need input the commands in a line and the press enter.
+Just like 'GGGGGGR1GGGGC3Q' and then press enter.Our program will handle it then.
+
+Last,you should know that after you input 'Q',the program will terminate when there's no one in both the buffer and checkpoints.
+
+Now,please press enter and input the config.
+
+
+Which way would you like to input the config?
+K means input by keyboard and F means input by file
+F
+Here are the results.
+MaxCustSingleLine=30
+MaxLines=8
+MaxSeqLen=10
+MinTimeLen=2
+MaxTimeLen=5
+MinRestTimeLen=30
+MaxRestTimeLen=60
+
+
+Now,press enter to start our program.
+
+
+T=0
+OFFDUTY=N
+ListLines=0,ListCustCount=0
+WIN1:State=Idle,ServLen=0/0,RestLen=0/0,WinListCustCount=0
+WIN2:State=Idle,ServLen=0/0,RestLen=0/0,WinListCustCount=0
+WIN3:State=Idle,ServLen=0/0,RestLen=0/0,WinListCustCount=0
+WIN4:State=Idle,ServLen=0/0,RestLen=0/0,WinListCustCount=0
+WIN5:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN6:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN7:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN8:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+
+GGGGGGGGGGGGGGGGGGGGGGG
+T=2.3
+23 passengers enter the buffer 
+
+T=3
+OFFDUTY=N
+ListLines=0,ListCustCount=0
+WIN1:State=Idle,ServLen=0/0,RestLen=0/0,WinListCustCount=6
+WIN2:State=Idle,ServLen=0/0,RestLen=0/0,WinListCustCount=6
+WIN3:State=Idle,ServLen=0/0,RestLen=0/0,WinListCustCount=6
+WIN4:State=Idle,ServLen=0/0,RestLen=0/0,WinListCustCount=5
+WIN5:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN6:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN7:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN8:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+
+R2
+T=6.0
+Check point2 request for rest 
+
+T=6
+OFFDUTY=N
+ListLines=0,ListCustCount=0
+WIN1:State=OnService,ServLen=2/3,RestLen=0/0,WinListCustCount=6
+WIN2:State=AskForRest,ServLen=2/5,RestLen=0/0,WinListCustCount=6
+WIN3:State=OnService,ServLen=2/4,RestLen=0/0,WinListCustCount=6
+WIN4:State=OnService,ServLen=0/3,RestLen=0/0,WinListCustCount=4
+WIN5:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN6:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN7:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN8:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+
+T=8.0
+Checkpoint 2 was agreed to rest 
+
+T=9
+OFFDUTY=N
+ListLines=0,ListCustCount=0
+WIN1:State=OnService,ServLen=0/4,RestLen=0/0,WinListCustCount=4
+WIN2:State=Prepare to rest,ServLen=0/4,RestLen=0/0,WinListCustCount=5
+WIN3:State=OnService,ServLen=1/4,RestLen=0/0,WinListCustCount=5
+WIN4:State=OnService,ServLen=0/2,RestLen=0/0,WinListCustCount=3
+WIN5:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN6:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN7:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN8:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+
+T=12
+OFFDUTY=N
+ListLines=0,ListCustCount=0
+WIN1:State=OnService,ServLen=3/4,RestLen=0/0,WinListCustCount=4
+WIN2:State=Prepare to rest,ServLen=3/4,RestLen=0/0,WinListCustCount=5
+WIN3:State=OnService,ServLen=0/3,RestLen=0/0,WinListCustCount=4
+WIN4:State=OnService,ServLen=1/3,RestLen=0/0,WinListCustCount=2
+WIN5:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN6:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN7:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN8:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+
+T=15
+OFFDUTY=N
+ListLines=0,ListCustCount=0
+WIN1:State=OnService,ServLen=2/3,RestLen=0/0,WinListCustCount=3
+WIN2:State=Prepare to rest,ServLen=2/5,RestLen=0/0,WinListCustCount=4
+WIN3:State=OnService,ServLen=0/5,RestLen=0/0,WinListCustCount=3
+WIN4:State=OnService,ServLen=1/3,RestLen=0/0,WinListCustCount=1
+WIN5:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN6:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN7:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN8:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+T=15.5
+28 passengers enter the buffer 
+
+T=16.1
+Check point 5 6 opend 
+
+T=17.1
+Check point prepare to close 
+
+T=18
+OFFDUTY=N
+ListLines=1,ListCustCount=3
+WIN1:State=OnService,ServLen=2/5,RestLen=0/0,WinListCustCount=6
+WIN2:State=Prepare to rest,ServLen=0/5,RestLen=0/0,WinListCustCount=3
+WIN3:State=OnService,ServLen=3/5,RestLen=0/0,WinListCustCount=6
+WIN4:State=OnService,ServLen=1/4,RestLen=0/0,WinListCustCount=6
+WIN5:State=Prepare to close,ServLen=1/0,RestLen=0/0,WinListCustCount=6
+WIN6:State=Prepare to close,ServLen=1/0,RestLen=0/0,WinListCustCount=6
+WIN7:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN8:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+
+T=21
+OFFDUTY=N
+ListLines=0,ListCustCount=0
+WIN1:State=OnService,ServLen=0/5,RestLen=0/0,WinListCustCount=6
+WIN2:State=Prepare to rest,ServLen=3/5,RestLen=0/0,WinListCustCount=3
+WIN3:State=OnService,ServLen=1/2,RestLen=0/0,WinListCustCount=6
+WIN4:State=OnService,ServLen=0/2,RestLen=0/0,WinListCustCount=6
+WIN5:State=Prepare to close,ServLen=4/0,RestLen=0/0,WinListCustCount=6
+WIN6:State=Prepare to close,ServLen=4/0,RestLen=0/0,WinListCustCount=6
+WIN7:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+WIN8:State=Close,ServLen=0/0RestLen=0/0,WinListCustCount=0
+
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+T=22.4
+59 passengers enter the buffer 
+
+T=23.1
+Check point 7 8 opend 
+
+T=24
+OFFDUTY=N
+ListLines=2,ListCustCount=57
+WIN1:State=OnService,ServLen=2/5,RestLen=0/0,WinListCustCount=6
+WIN2:State=Prepare to rest,ServLen=0/3,RestLen=0/0,WinListCustCount=2
+WIN3:State=OnService,ServLen=1/4,RestLen=0/0,WinListCustCount=6
+WIN4:State=OnService,ServLen=0/2,RestLen=0/0,WinListCustCount=6
+WIN5:State=Prepare to close,ServLen=6/0,RestLen=0/0,WinListCustCount=6
+WIN6:State=Prepare to close,ServLen=6/0,RestLen=0/0,WinListCustCount=6
+WIN7:State=Idle,ServLen=0/0,RestLen=0/0,WinListCustCount=0
+WIN8:State=Idle,ServLen=0/0,RestLen=0/0,WinListCustCount=0
+
+T=27
+OFFDUTY=N
+ListLines=2,ListCustCount=42
+WIN1:State=OnService,ServLen=0/4,RestLen=0/0,WinListCustCount=6
+WIN2:State=Prepare to rest,ServLen=0/5,RestLen=0/0,WinListCustCount=1
+WIN3:State=OnService,ServLen=0/5,RestLen=0/0,WinListCustCount=6
+WIN4:State=OnService,ServLen=1/4,RestLen=0/0,WinListCustCount=6
+WIN5:State=Prepare to close,ServLen=9/0,RestLen=0/0,WinListCustCount=6
+WIN6:State=Prepare to close,ServLen=9/0,RestLen=0/0,WinListCustCount=6
+WIN7:State=OnService,ServLen=1/3,RestLen=0/0,WinListCustCount=6
+WIN8:State=OnService,ServLen=1/2,RestLen=0/0,WinListCustCount=6
+
+T=30
+OFFDUTY=N
+ListLines=2,ListCustCount=39
+WIN1:State=OnService,ServLen=3/4,RestLen=0/0,WinListCustCount=6
+WIN2:State=Prepare to rest,ServLen=3/5,RestLen=0/0,WinListCustCount=1
+WIN3:State=OnService,ServLen=3/5,RestLen=0/0,WinListCustCount=6
+WIN4:State=OnService,ServLen=0/4,RestLen=0/0,WinListCustCount=6
+WIN5:State=Prepare to close,ServLen=12/0,RestLen=0/0,WinListCustCount=6
+WIN6:State=Prepare to close,ServLen=12/0,RestLen=0/0,WinListCustCount=6
+WIN7:State=OnService,ServLen=1/5,RestLen=0/0,WinListCustCount=6
+WIN8:State=OnService,ServLen=2/4,RestLen=0/0,WinListCustCount=6
+
+T=33
+OFFDUTY=N
+ListLines=2,ListCustCount=36
+WIN1:State=OnService,ServLen=2/3,RestLen=0/0,WinListCustCount=6
+WIN2:State=Rest,ServLen=0/0,RestLen=1/40,WinListCustCount=0
+WIN3:State=OnService,ServLen=1/5,RestLen=0/0,WinListCustCount=6
+WIN4:State=OnService,ServLen=3/4,RestLen=0/0,WinListCustCount=6
+WIN5:State=Prepare to close,ServLen=15/0,RestLen=0/0,WinListCustCount=6
+WIN6:State=Prepare to close,ServLen=15/0,RestLen=0/0,WinListCustCount=6
+WIN7:State=OnService,ServLen=4/5,RestLen=0/0,WinListCustCount=6
+WIN8:State=OnService,ServLen=1/5,RestLen=0/0,WinList

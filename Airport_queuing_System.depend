@@ -1,0 +1,94 @@
+# depslib dependency file v1.0
+1496470264 source:d:\codes\airport_queuing_system\command.c
+	<stdio.h>
+	<string.h>
+	<time.h>
+	"model.h"
+	"output.h"
+
+1496469762 d:\codes\airport_queuing_system\model.h
+	<stdio.h>
+	<time.h>
+
+1496469002 source:d:\codes\airport_queuing_system\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	<windows.h>
+	"model.h"
+	"guide.h"
+	"input.h"
+	"output.h"
+	"random.h"
+	"initialize.h"
+	"terminate.h"
+	"updateState.h"
+
+1496469510 d:\codes\airport_queuing_system\guide.h
+
+1496469660 d:\codes\airport_queuing_system\input.h
+
+1496470440 d:\codes\airport_queuing_system\output.h
+
+1496469878 d:\codes\airport_queuing_system\random.h
+
+1496469593 d:\codes\airport_queuing_system\initialize.h
+
+1496469955 d:\codes\airport_queuing_system\terminate.h
+
+1496470025 d:\codes\airport_queuing_system\updatestate.h
+
+1496470288 source:d:\codes\airport_queuing_system\advancedfunction.c
+	<stdio.h>
+	<string.h>
+	"model.h"
+	"output.h"
+
+1496469478 source:d:\codes\airport_queuing_system\guide.c
+	<stdio.h>
+	<time.h>
+	"output.h"
+	"model.h"
+
+1496469549 source:d:\codes\airport_queuing_system\initialize.c
+	<stdio.h>
+	<time.h>
+	<stdlib.h>
+	"model.h"
+
+1496469630 source:d:\codes\airport_queuing_system\input.c
+	<stdio.h>
+	<string.h>
+	"model.h"
+	"command.h"
+
+1496469434 d:\codes\airport_queuing_system\command.h
+
+1496469717 source:d:\codes\airport_queuing_system\output.c
+	<stdio.h>
+	<windows.h>
+	<time.h>
+	"model.h"
+
+1496469837 source:d:\codes\airport_queuing_system\random.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"model.h"
+
+1496469913 source:d:\codes\airport_queuing_system\terminate.c
+	<stdio.h>
+	"model.h"
+
+1496469999 source:d:\codes\airport_queuing_system\updatestate.c
+	<stdio.h>
+	<time.h>
+	<string.h>
+	<windows.h>
+	"random.h"
+	"model.h"
+	"advancedFunction.h"
+
+1496470418 d:\codes\airport_queuing_system\advancedfunction.h
+
