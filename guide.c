@@ -18,7 +18,7 @@ void guide1(){
 	printf("Just like 'GGGGGGR1GGGGC3Q' and then press enter.Our program will handle it then.\n\n");
 	printf("Last,you should know that after you input 'Q',the program will terminate when there's no one in both the buffer and checkpoints.\n\n");
 	printf("Now,please press enter and input the config.\n\n\n");
-
+	
 	fputs("Thank you for using our airport security queuing system.\n",fptr);
 	fputs("Here is something you should before using it.\n\n",fptr);
 	fputs("First,you should choose a way to input the config first, by the keyboard or files.\n\n",fptr);
@@ -33,7 +33,7 @@ void guide1(){
 	fputs("Now,please press enter and input the config.\n\n\n",fptr);
 	getchar();
 }
-//脪媒碌录陆莽脙忙1拢卢脫脙脫脷脣碌脙梅脢鹿脫脙脨毛脰陋
+//引导界面1，用于说明使用须知 
 
 
 void guide2(){
@@ -41,7 +41,7 @@ void guide2(){
 	fputs("Now,press enter to start our program.\n\n\n",fptr);
 	getchar();
 }
-//脪媒碌录陆莽脙忙2拢卢脪媒碌录脫脙禄搂脝么露炉鲁脤脨貌
+//引导界面2，引导用户启动程序 
 
 void guide3(){
 	printf("T=%.lf\n",(double)(clock()-start_time)/CLOCKS_PER_SEC);
@@ -49,4 +49,4 @@ void guide3(){
 	standard_print();
 	fprintf(fptr,"\n\nIt's the end.");
 }
-//脪媒碌录陆莽脙忙3拢卢鲁脤脨貌脰脮脰鹿脢卤脭脣脨脨拢卢脤谩脢戮鲁脤脨貌脪脩戮颅陆谩脢酶
+//引导界面3，程序终止时运行，提示程序已经结束 

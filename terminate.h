@@ -1,4 +1,1 @@
-#ifndef TERMINATE_H_INCLUDED
-#define TERMINATE_H_INCLUDED
 int isTerminate();
-#endif // TERMINATE_H_INCLUDED

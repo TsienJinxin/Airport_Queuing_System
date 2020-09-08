@@ -1,42 +1,39 @@
-#ifndef MODEL_H_INCLUDED
-#define MODEL_H_INCLUDED
-
 #include<stdio.h>
 #include<time.h>
 
-int MaxCustSingleLine;      //碌楼露脫脕脨脳卯麓贸碌脠麓媒鲁脣驴脥脢媒
-int MaxLines;              //脡脽脨脦禄潞鲁氓脟酶脳卯露脿脫脡MaxLines赂枚脰卤露脫脳茅鲁脡
-int MaxSeqLen;            //脳卯麓贸脭脢脨铆碌脠麓媒鲁陇露脠
-int MinTimeLen;           //脪禄麓脦掳虏录矛脳卯露脤脢卤鲁陇拢卢碌楼脦禄脦陋脙毛
-int MaxTimeLen;          //脪禄麓脦掳虏录矛脳卯麓贸脢卤鲁陇拢卢碌楼脦禄脦陋脙毛
-int MinRestTimeLen;       //掳虏录矛驴脷脪禄麓脦脭脻脥拢脨脻脧垄脳卯露脤脢卤鲁陇拢卢碌楼脦禄脦陋脙毛
-int MaxRestTimeLen;      //掳虏录矛驴脷脪禄麓脦脭脻脥拢脨脻脧垄脳卯麓贸脢卤鲁陇拢卢碌楼脦禄脦陋脙毛
+int MaxCustSingleLine;      //单队列最大等待乘客数
+int MaxLines;              //蛇形缓冲区最多由MaxLines个直队组成
+int MaxSeqLen;            //最大允许等待长度
+int MinTimeLen;           //一次安检最短时长，单位为秒
+int MaxTimeLen;          //一次安检最大时长，单位为秒
+int MinRestTimeLen;       //安检口一次暂停休息最短时长，单位为秒
+int MaxRestTimeLen;      //安检口一次暂停休息最大时长，单位为秒
 
-typedef struct list1{
-    int people;                                //掳虏录矛驴脷脜脜露脫碌脛脠脣脢媒
-    int state;								   //掳虏录矛驴脷脳麓脤卢拢卢1脦陋驴脮脧脨拢卢2脦陋路镁脦帽拢卢3脦陋脨脻脧垄拢卢4脦陋脡锚脟毛脨脻脧垄拢卢5脦陋鹿脴卤脮 ,6脦陋脳录卤赂脨脻脧垄,7脦陋脳录卤赂鹿脴卤脮
-    int currentPassenger_need_service_time;	   //碌卤脟掳鲁脣驴脥脣霉脨猫路镁脦帽碌脛脳脺脢卤录盲
-    int currentPassenger_already_service_time; //碌卤脟掳鲁脣驴脥脪脩路镁脦帽脢卤录盲
-    int need_rest_time; 					   //掳虏录矛驴脷录脝禄庐脨脻脧垄脢卤录盲
-    int already_restTime;					   //掳虏录矛驴脷脪脩脨脻脧垄脢卤录盲
-	int sum_already_restTime;  				   //掳虏录矛驴脷脌脹录脝脨脻脧垄脢卤录盲
-	double ask_for_rest_current_time;             //脡锚脟毛脨脻脧垄碌脛脢卤驴脤
-}checkpoint;
-
-
-typedef struct list2{
-    int people;								//禄潞鲁氓脟酶碌脛脠脣脢媒
-    int isfull;								//禄潞鲁氓脟酶脢脟路帽脪脩脗煤
-}buffer;
+typedef struct list1
+{
+    int people;                                //安检口排队的人数
+    int state;								   //安检口状态，1为空闲，2为服务，3为休息，4为申请休息，5为关闭 ,6为准备休息,7为准备关闭
+    int currentPassenger_need_service_time;	   //当前乘客所需服务的总时间
+    int currentPassenger_already_service_time; //当前乘客已服务时间
+    int need_rest_time; 					   //安检口计划休息时间
+    int already_restTime;					   //安检口已休息时间
+    int sum_already_restTime;  				   //安检口累计休息时间
+    double ask_for_rest_current_time;             //申请休息的时刻
+} checkpoint;
 
 
-checkpoint cp[9];							//麓麓陆篓脪禄赂枚checkpoint脨脦碌脛陆谩鹿鹿脤氓脢媒脳茅拢卢脫脙脫脷麓煤卤铆掳脣赂枚掳虏录矛驴脷
-buffer bff;									//麓麓陆篓脪禄赂枚buffer脨脦碌脛陆谩鹿鹿脤氓拢卢脫脙脫脷麓煤卤铆禄潞鲁氓脟酶
+typedef struct list2
+{
+    int people;								//缓冲区的人数
+    int isfull;								//缓冲区是否已满
+} buffer;
 
 
-int isOnDuty;								//int脨脦卤盲脕驴麓煤卤铆碌卤脟掳脢脟路帽麓娄脫脷脡脧掳脿脳麓脤卢
+checkpoint cp[9];							//创建一个checkpoint形的结构体数组，用于代表八个安检口
+buffer bff;									//创建一个buffer形的结构体，用于代表缓冲区
 
 
-clock_t start_time;							//麓煤卤铆鲁脤脨貌驴陋脢录脭脣脨脨碌脛脢卤录盲
+int isOnDuty;								//int形变量代表当前是否处于上班状态
 
-#endif // MODEL_H_INCLUDED
+
+clock_t start_time;							//代表程序开始运行的时间

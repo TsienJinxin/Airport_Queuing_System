@@ -9,12 +9,13 @@ int generate_random_service_time()
 	i = (int)(rand() % ( MaxTimeLen - MinTimeLen + 1) + MinTimeLen);
 	return i;
 }
-//赂脙潞炉脢媒路碌禄脴脰碌脦陋脪禄赂枚麓娄脫脷 MinTimeLen潞脥 MaxTimeLen脰庐录盲碌脛脣忙禄煤脢媒
+//该函数返回值为一个处于 MinTimeLen和 MaxTimeLen之间的随机数
 
 int generate_random_rest_time()
 {
+
 	int i;
 	i = rand() % ( MaxRestTimeLen - MinRestTimeLen + 1) + MinRestTimeLen;
 	return i;
 }
-//赂脙潞炉脢媒路碌禄脴脰碌脦陋脪禄赂枚麓娄脫脷 MinRestTimeLen潞脥 MaxRestTimeLen脰庐录盲碌脛脣忙禄煤脢媒
+//该函数返回值为一个处于 MinRestTimeLen和 MaxRestTimeLen之间的随机数

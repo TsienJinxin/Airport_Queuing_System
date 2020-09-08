@@ -3,25 +3,25 @@
 #include <time.h>
 #include "model.h"
 
-extern HANDLE hMutex;				//碌梅脫脙脥芒虏驴卤盲脕驴hMutex拢卢脳梅脦陋禄楼鲁芒露脭脧贸
+extern HANDLE hMutex;				//调用外部变量hMutex，作为互斥对象 
 extern FILE *fptr;
 
 void standard_print(){
-	int c=1;						//录脝脢媒脝梅拢卢脫脙脫脷脩颅禄路陆谩鹿鹿脰脨
+	int c=1;						//计数器，用于循环结构中 
 	if(isOnDuty==1){
 		printf("OFFDUTY=N\n");
 		fputs("OFFDUTY=N\n",fptr);
-	}
-	else{
+	}	
+	else{ 
 		printf("OFFDUTY=Y\n");
 		fputs("OFFDUTY=Y\n",fptr);
 	}
-	//赂霉戮脻isOnDuty碌脛脰碌脢盲鲁枚碌卤脟掳脡脧脧脗掳脿脳麓脤卢
-
+	//根据isOnDuty的值输出当前上下班状态
+	 
 	printf("ListLines=%d,ListCustCount=%d\n",bff.people%MaxCustSingleLine==0?bff.people/MaxCustSingleLine:bff.people/MaxCustSingleLine+1,bff.people);
 	fprintf(fptr,"ListLines=%d,ListCustCount=%d\n",bff.people%MaxCustSingleLine==0?bff.people/MaxCustSingleLine:bff.people/MaxCustSingleLine+1,bff.people);
-	//脢盲鲁枚禄潞鲁氓脟酶碌脛脳麓脤卢
-
+	//输出缓冲区的状态
+	 
 	for(c=1;c<=8;c++){
 		switch(cp[c].state){
 			case 1:
@@ -29,109 +29,109 @@ void standard_print(){
 				printf("ServLen=0/0,");
 				printf("RestLen=0/0,");
 				printf("WinListCustCount=%d",cp[c].people);
-
+				
 				fprintf(fptr,"WIN%d:State=Idle,",c);
 				fprintf(fptr,"ServLen=0/0,");
 				fprintf(fptr,"RestLen=0/0,");
 				fprintf(fptr,"WinListCustCount=%d",cp[c].people);
 				break;
-			//掳虏录矛驴脷脳麓脤卢脦陋驴脮脧脨
+			//安检口状态为空闲 
 			case 2:
 				printf("WIN%d:State=OnService,",c);
 				printf("ServLen=%d/%d,",cp[c].currentPassenger_already_service_time,cp[c].currentPassenger_need_service_time);
 				printf("RestLen=0/0,");
 				printf("WinListCustCount=%d",cp[c].people);
-
+				
 				fprintf(fptr,"WIN%d:State=OnService,",c);
 				fprintf(fptr,"ServLen=%d/%d,",cp[c].currentPassenger_already_service_time,cp[c].currentPassenger_need_service_time);
 				fprintf(fptr,"RestLen=0/0,");
 				fprintf(fptr,"WinListCustCount=%d",cp[c].people);
 				break;
-			//掳虏录矛驴脷脳麓脤卢脦陋鹿陇脳梅脰脨
+			//安检口状态为工作中 
 			case 3:
 				printf("WIN%d:State=Rest,",c);
 				printf("ServLen=0/0,");
 				printf("RestLen=%d/%d,",cp[c].already_restTime,cp[c].need_rest_time);
 				printf("WinListCustCount=0",cp[c].people);
-
+				
 				fprintf(fptr,"WIN%d:State=Rest,",c);
 				fprintf(fptr,"ServLen=0/0,");
 				fprintf(fptr,"RestLen=%d/%d,",cp[c].already_restTime,cp[c].need_rest_time);
 				fprintf(fptr,"WinListCustCount=0",cp[c].people);
 				break;
-			//掳虏录矛驴脷脳麓脤卢脦陋脨脻脧垄
+			//安检口状态为休息 
 			case 4:
 				printf("WIN%d:State=AskForRest,",c);
 				printf("ServLen=%d/%d,",cp[c].currentPassenger_already_service_time,cp[c].currentPassenger_need_service_time);
 				printf("RestLen=0/0,");
 				printf("WinListCustCount=%d",cp[c].people);
-
+				
 				fprintf(fptr,"WIN%d:State=AskForRest,",c);
 				fprintf(fptr,"ServLen=%d/%d,",cp[c].currentPassenger_already_service_time,cp[c].currentPassenger_need_service_time);
 				fprintf(fptr,"RestLen=0/0,");
 				fprintf(fptr,"WinListCustCount=%d",cp[c].people);
 				break;
-			//掳虏录矛驴脷脳麓脤卢脦陋脡锚脟毛脨脻脧垄
+			//安检口状态为申请休息 
 			case 5:
 				printf("WIN%d:State=Close,",c);
-				printf("ServLen=0/0");
+				printf("ServLen=0/0,");
 				printf("RestLen=0/0,");
 				printf("WinListCustCount=0");
-
+				
 				fprintf(fptr,"WIN%d:State=Close,",c);
-				fprintf(fptr,"ServLen=0/0");
+				fprintf(fptr,"ServLen=0/0,");
 				fprintf(fptr,"RestLen=0/0,");
 				fprintf(fptr,"WinListCustCount=0");
 				break;
-			//掳虏录矛驴脷脳麓脤卢脦陋鹿脴卤脮
+			//安检口状态为关闭 
 			case 6:
 				printf("WIN%d:State=Prepare to rest,",c);
 				printf("ServLen=%d/%d,",cp[c].currentPassenger_already_service_time,cp[c].currentPassenger_need_service_time);
 				printf("RestLen=0/0,");
 				printf("WinListCustCount=%d",cp[c].people);
-
+				
 				fprintf(fptr,"WIN%d:State=Prepare to rest,",c);
 				fprintf(fptr,"ServLen=%d/%d,",cp[c].currentPassenger_already_service_time,cp[c].currentPassenger_need_service_time);
 				fprintf(fptr,"RestLen=0/0,");
 				fprintf(fptr,"WinListCustCount=%d",cp[c].people);
 				break;
-			//掳虏录矛驴脷脳麓脤卢脦陋脳录卤赂脨脻脧垄
+			//安检口状态为准备休息 
 			case 7:
 				printf("WIN%d:State=Prepare to close,",c);
 				printf("ServLen=%d/%d,",cp[c].currentPassenger_already_service_time,cp[c].currentPassenger_need_service_time);
 				printf("RestLen=0/0,");
 				printf("WinListCustCount=%d",cp[c].people);
-
+				
 				fprintf(fptr,"WIN%d:State=Prepare to close,",c);
 				fprintf(fptr,"ServLen=%d/%d,",cp[c].currentPassenger_already_service_time,cp[c].currentPassenger_need_service_time);
 				fprintf(fptr,"RestLen=0/0,");
 				fprintf(fptr,"WinListCustCount=%d",cp[c].people);
 				break;
-			//掳虏录矛驴脷脳麓脤卢脦陋脳录卤赂鹿脴卤脮
+			//安检口状态为准备关闭 
 			}
 		printf("\n");
 		fprintf(fptr,"\n");
-	//脢盲鲁枚掳虏录矛驴脷碌脛脳麓脤卢
-	//赂霉戮脻掳虏录矛驴脷碌脛脳麓脤卢拢卢脢盲鲁枚虏禄脥卢脛脷脠脻
+	//输出安检口的状态
+	//根据安检口的状态，输出不同内容	
 	}
 	printf("\n");
 	fprintf(fptr,"\n");
 }
-//脢盲鲁枚脢脟路帽脧脗掳脿拢卢禄潞鲁氓脟酶脳麓脤卢拢卢掳虏录矛驴脷脳麓脤卢
-//脳梅脦陋脢盲鲁枚碌脛脪禄虏驴路脰卤禄脝盲脣没潞炉脢媒脣霉碌梅脫脙
+//输出是否下班，缓冲区状态，安检口状态
+//作为输出的一部分被其他函数所调用
 
-
+ 
 void output_after_state_change(int order_g[],int order_r[],int order_c[],int order_q)
 {
-	int c=1;						//c脦陋录脝脢媒脝梅拢卢脫脙脫脷脩颅禄路虏脵脳梅
-	int i=0;
-	//i脫脙脫脷脜脨露脧赂脙脰脺脝脷脢脟路帽脫脨脡锚脟毛脨脻脧垄脫毛禄脰赂麓鹿陇脳梅碌脛掳虏录矛驴脷
-	//脠么i脦陋 0拢卢脭貌脦脼拢卢虏禄脫脙脳枚脧脿脫娄脢盲鲁枚拢禄路帽脭貌拢卢脢盲鲁枚脧脿脫娄碌脛卤盲禄炉
-
+	int c=1;						//c为计数器，用于循环操作 
+	int i=0;						
+	//i用于判断该周期是否有申请休息与恢复工作的安检口
+	//若i为 0，则无，不用做相应输出；否则，输出相应的变化 
+	
 	printf("T=%.1lf\n",(double)(clock()-start_time)/CLOCKS_PER_SEC);
 	fprintf(fptr,"T=%.1lf\n",(double)(clock()-start_time)/CLOCKS_PER_SEC);
-	//脢盲鲁枚碌卤脟掳脢卤录盲
-
+	//输出当前时间 
+	
 	if(order_g[1]!=0){
 		if(order_g[1]==1){
 			printf("A passenger enters the buffer ");
@@ -142,9 +142,9 @@ void output_after_state_change(int order_g[],int order_r[],int order_c[],int ord
 			fprintf(fptr,"%d passengers enter the buffer ",order_g[1]);
 		}
 	}
-	//脢盲鲁枚脫脨露脿脡脵鲁脣驴脥鲁脡鹿娄陆酶脠毛掳虏录矛驴脷
-	//赂脙露脦麓煤脗毛露脭碌楼露脌鲁脣驴脥陆酶脠毛潞脥赂麓脢媒鲁脣驴脥陆酶脠毛陆酶脨脨脕脣路脰卤冒碌脛麓娄脌铆拢篓脫垄脦脛脫茂路篓脦脢脤芒拢漏拢卢脧脗脙忙脪虏露录陆酶脨脨脕脣脧脿脥卢碌脛虏脵脳梅
-
+	//输出有多少乘客成功进入安检口
+	//该段代码对单独乘客进入和复数乘客进入进行了分别的处理（英文语法问题），下面也都进行了相同的操作 
+	 
 	if(order_g[0]!=0){
 		if(order_g[0]==1){
 			printf("A passenger is refused access to the buffer ");
@@ -155,22 +155,22 @@ void output_after_state_change(int order_g[],int order_r[],int order_c[],int ord
 			fprintf(fptr,"%d passengers are refused access to the buffer ",order_g[0]);
 		}
 	}
-	//脢盲鲁枚脫脨露脿脡脵鲁脣驴脥脙禄脛脺鲁脡鹿娄陆酶脠毛掳虏录矛驴脷
-
+	//输出有多少乘客没能成功进入安检口
+	
 	if(order_g[2]!=0){
 		printf("It's off duty now so passengers can't enter the buffer ");
 		fprintf(fptr,"It's off duty now so passengers can't enter the buffer ");
 	}
-	//脠么碌卤脟掳麓娄脫脷脧脗掳脿脳麓脤卢拢卢鲁脣驴脥脦脼路篓陆酶脠毛掳虏录矛驴脷
-
+	//若当前处于下班状态，乘客无法进入安检口 
+	
 	for(c=1;c<=8;c++){
 		if(order_r[c]==1){
 			i=1;
 			break;
 		}
 	}
-	//脜脨露脧碌卤脟掳脰脺脝脷脢脟路帽脫脨掳虏录矛驴脷脡锚脟毛脨脻脧垄
-
+	//判断当前周期是否有安检口申请休息 
+	
 	if(i==1){
 		printf("Check point");
 		fprintf(fptr,"Check point");
@@ -183,16 +183,16 @@ void output_after_state_change(int order_g[],int order_r[],int order_c[],int ord
 		printf("request for rest ");
 		fprintf(fptr,"request for rest ");
 	}
-	//脢盲鲁枚脡锚脟毛脨脻脧垄碌脛掳虏录矛驴脷碌脛脨脜脧垄
-
+	//输出申请休息的安检口的信息
+	 
 	for(i=0,c=1;c<=8;c++){
 		if(order_c[c]==1){
 			i=1;
 			break;
 		}
 	}
-	//脜脨露脧碌卤脟掳脰脺脝脷脢脟路帽脫脨掳虏录矛驴脷脡锚脟毛禄脰赂麓鹿陇脳梅
-
+	//判断当前周期是否有安检口申请恢复工作
+	
 	if(i==1){
 		printf("Check point");
 		fprintf(fptr,"Check point");
@@ -205,14 +205,14 @@ void output_after_state_change(int order_g[],int order_r[],int order_c[],int ord
 		printf("request reinstatement of security ");
 		fprintf(fptr,"request reinstatement of security ");
 	}
-	//脢盲鲁枚脡锚脟毛禄脰赂麓鹿陇脳梅碌脛掳虏录矛驴脷碌脛脨脜脧垄
-
+	//输出申请恢复工作的安检口的信息
+	
 	if(order_q==1){
 		printf("It's off duty now");
 		fprintf(fptr,"It's off duty now");
 	}
-	//脠么碌卤脟掳脰脺脝脷脢脮碌陆脧脗掳脿脙眉脕卯拢卢脭貌脢盲鲁枚脧脿脫娄脨脜脧垄
-
+	//若当前周期收到下班命令，则输出相应信息
+	 
 	printf("\n\n");
 	fprintf(fptr,"\n\n");
 }
@@ -220,41 +220,41 @@ void output_after_state_change(int order_g[],int order_r[],int order_c[],int ord
 
 void output_periodic()
 {
-	clock_t start,finish;
-	//start录脟脗录赂脙潞炉脢媒驴陋脢录脭脣脨脨脢卤录盲拢卢finish录脟脗录潞炉脢媒陆谩脢酶脭脣脨脨脢卤录盲
+	clock_t start,finish;				
+	//start记录该函数开始运行时间，finish记录函数结束运行时间 
 	double duration;
-	//duration脦陋潞炉脢媒脭脣脨脨潞脛路脩碌脛脢卤录盲
-
-	//脪陋脳枚鲁枚脡脧脢枚麓娄脌铆碌脛脭颅脪貌拢潞赂脙潞炉脢媒脪陋卤拢脰陇脙驴脠媒脙毛脭脣脨脨脪禄麓脦拢卢脠么虏禄脭脷脧脽鲁脤脨脻脙脽脢卤录盲脰脨录玫脠楼脧脽鲁脤脭脣脨脨脢卤录盲拢卢碌卤鲁脤脨貌脭脣脨脨脪禄露脦脢卤录盲潞贸禄谩虏煤脡煤脦贸虏卯
-
-	// 脮芒脰脰麓娄脌铆路陆路篓脠脭禄谩麓忙脭脷脪禄露篓脦贸虏卯拢卢虏禄鹿媒潞脺脨隆拢卢驴脡潞枚脗脭
-
+	//duration为函数运行耗费的时间
+	
+	//要做出上述处理的原因：该函数要保证每三秒运行一次，若不在线程休眠时间中减去线程运行时间，当程序运行一段时间后会产生误差
+	
+	// 这种处理方法仍会存在一定误差，不过很小，可忽略
+	 
 	while(1){
-		WaitForSingleObject(hMutex,INFINITE);			//碌脠麓媒禄楼鲁芒露脭脧贸
+		WaitForSingleObject(hMutex,INFINITE);			//等待互斥对象 
 		start=clock();
-
+		
 		printf("T=%.lf\n",(double)(start-start_time)/CLOCKS_PER_SEC);
 		fprintf(fptr,"T=%.lf\n",(double)(start-start_time)/CLOCKS_PER_SEC);
-		//脢盲鲁枚碌卤脟掳脢卤录盲
-
-		standard_print();					//脢盲鲁枚禄潞鲁氓脟酶潞脥掳虏录矛驴脷碌脛脳麓脤卢
-		ReleaseMutex(hMutex);				//脢脥路脜禄楼鲁芒露脭脧贸
+		//输出当前时间
+		 
+		standard_print();					//输出缓冲区和安检口的状态 
+		ReleaseMutex(hMutex);				//释放互斥对象 
 		finish=clock();
 		duration=(double)(finish-start)/CLOCKS_PER_SEC;
 		duration=duration*1000;
-		Sleep(3000-duration);				//脧脽鲁脤脨脻脧垄拢卢脪脩麓茂碌陆脰脺脝脷脨脭脢盲鲁枚碌脛脛驴碌脛
+		Sleep(3000-duration);				//线程休息，已达到周期性输出的目的 
 	}
 }
-//脫脙脫脷掳麓脪禄露篓脰脺脝脷脢盲鲁枚掳虏录矛麓贸脤眉碌脛脳麓脤卢
-//脫脡脫脷陆枚脫脙脫脷脰脺脝脷脢盲鲁枚  拢卢鹿脢虏垄虏禄脨猫脪陋脢盲鲁枚脳麓脤卢卤盲禄炉脨脜脧垄
+//用于按一定周期输出安检大厅的状态
+//由于仅用于周期输出  ，故并不需要输出状态变化信息
 
 
 void output_after_judge_rest(int re[][2]){
-	int c=1;					//c脦陋录脝脢媒脝梅拢卢脫脙脫脷脩颅禄路虏脵脳梅
+	int c=1;					//c为计数器，用于循环操作 
 	printf("T=%.1lf\n",(double)(clock()-start_time)/CLOCKS_PER_SEC);
 	fprintf(fptr,"T=%.1lf\n",(double)(clock()-start_time)/CLOCKS_PER_SEC);
-	//脢盲鲁枚脢卤录盲
-
+	//输出时间
+	 
 	for(c=1;c<=8;c++){
 		if(re[c][0]==1&&re[c][1]==0){
 			printf("Checkpoint %d was refused to rest ",c);
@@ -265,8 +265,8 @@ void output_after_judge_rest(int re[][2]){
 			fprintf(fptr,"Checkpoint %d was agreed to rest ",c);
 		}
 	}
-	//脢盲鲁枚掳虏录矛驴脷脥卢脪芒脨脻脧垄禄貌戮脺戮酶脨脻脧垄碌脛脨脜脧垄
-
+	//输出安检口同意休息或拒绝休息的信息 
+	 
 	printf("\n\n");
 	fprintf(fptr,"\n\n");
 }
@@ -274,17 +274,17 @@ void output_after_judge_rest(int re[][2]){
 void  output_after_close(int re[]){
 	printf("T=%.1lf\n",(double)(clock()-start_time)/CLOCKS_PER_SEC);
 	fprintf(fptr,"T=%.1lf\n",(double)(clock()-start_time)/CLOCKS_PER_SEC);
-	//脢盲鲁枚脢卤录盲
-	int c;						//c脦陋录脝脢媒脝梅拢卢脫脙脫脷脩颅禄路脫茂戮盲
-	int i=0;					//i脫脙脫脷脜脨露脧脢脟路帽脫脨掳虏录矛驴脷陆酶脨脨脕脣鹿脴卤脮禄貌驴陋路脜虏脵脳梅拢禄i=1脭貌脫脨掳虏录矛驴脷陆酶脨脨脧脿鹿脴虏脵脳梅拢卢i=0脭貌脙禄脫脨
+	//输出时间 
+	int c;						//c为计数器，用于循环语句 
+	int i=0;					//i用于判断是否有安检口进行了关闭或开放操作；i=1则有安检口进行相关操作，i=0则没有 
 	for(c=5;c<=8;c++){
 		if(re[c]==1){
 			i=1;
 			break;
 		}
 	}
-	//脜脨露脧脢脟路帽脫脨掳虏录矛驴脷驴陋路脜拢卢麓脫露酶脜脨露脧脢脟路帽脢盲鲁枚
-
+	//判断是否有安检口开放，从而判断是否输出
+	 
 	if(i==1){
 		printf("Check point ");
 		fprintf(fptr,"Check point ");
@@ -297,21 +297,21 @@ void  output_after_close(int re[]){
 		printf("opend ");
 		fprintf(fptr,"opend ");
 	}
-	//脢盲鲁枚掳虏录矛驴脷驴陋路脜脨脜脧垄
-
+	//输出安检口开放信息
+	
 	for(c=5,i=0;c<=8;c++){
 		if(re[c]==2){
 			i=1;
 			break;
 		}
 	}
-	//脜脨露脧脢脟路帽脫脨掳虏录矛驴脷鹿脴卤脮拢卢麓脫露酶脜脨露脧脢脟路帽脢盲鲁枚
-
+	//判断是否有安检口关闭，从而判断是否输出
+	 
 	if(i==1){
 		printf("Check point ");
 		fprintf(fptr,"Check point ");
 		for(c=5;c<=8;c++){
-			if(re[c]==1){
+			if(re[c]==2){
 				printf("%d ",c);
 				fprintf(fptr,"%d ",c);
 			}
@@ -319,8 +319,9 @@ void  output_after_close(int re[]){
 		printf("prepare to close ");
 		fprintf(fptr,"prepare to close ");
 	}
-	//脢盲鲁枚掳虏录矛驴脷鹿脴卤脮脨脜脧垄
-
+	//输出安检口关闭信息
+	
 	printf("\n\n");
 	fprintf(fptr,"\n\n");
 }
+

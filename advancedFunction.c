@@ -1,20 +1,20 @@
 #include <stdio.h>
 #include <string.h>
 #include "model.h"
-#include "output.h"
-void Passenger_flow_monitoring(){
-	int c;						//c脦陋录脝脢媒脝梅拢卢脫脙脫脷脩颅禄路虏脵脳梅
-	int sum;					//sum麓煤卤铆驴陋路脜碌脛掳虏录矛驴脷脳脺脢媒
-	int i=0;					//i脫脙脫脷脜脨露脧脢脟路帽脫脨掳虏录矛驴脷驴陋路脜禄貌鹿脴卤脮拢卢麓脫露酶戮枚露篓脢脟路帽脢盲鲁枚
-	int re[9];					//re录脟脗录麓娄脌铆陆谩鹿没
-	memset(re,0,sizeof(re));	//鲁玫脢录禄炉脢媒脳茅re
 
+void Passenger_flow_monitoring(){
+	int c;						//c为计数器，用于循环操作 
+	int sum;					//sum代表开放的安检口总数 
+	int i=0;					//i用于判断是否有安检口开放或关闭，从而决定是否输出 
+	int re[9];					//re记录处理结果 
+	memset(re,0,sizeof(re));	//初始化数组re
+	 
 	for(c=1;c<=8;c++){
 		if(cp[c].state!=5&&cp[c].state!=7)
 			sum++;
 	}
-	//碌脙鲁枚sum碌脛脰碌
-
+	//得出sum的值
+	 
 	for(c=5;c<=8&&bff.people>sum*3;c++){
 		if(cp[c].state==5){
 			cp[c].state=1;
@@ -22,8 +22,8 @@ void Passenger_flow_monitoring(){
 			sum++;
 		}
 	}
-	//脜脨露脧脢脟路帽脫脨掳虏录矛驴脷脨猫脪陋驴陋路脜
-
+	//判断是否有安检口需要开放
+	 
 	for(c=5;c<=8&&bff.people<sum*2;c++){
 		if(cp[c].state!=5&&cp[c].state!=7){
 			cp[c].state=7;
@@ -31,31 +31,31 @@ void Passenger_flow_monitoring(){
 			sum--;
 		}
 	}
-	//脜脨露脧脢脟路帽脫脨掳虏录矛驴脷脨猫脪陋鹿脴卤脮
-
+	//判断是否有安检口需要关闭
+	 
 	for(c=5;c<=8;c++){
 		if(re[c]!=0){
 			i=1;
 			break;
 		}
 	}
-	//脜脨露脧脢脟路帽脫脨掳虏录矛驴脷驴陋路脜鹿脴卤脮脳麓脤卢脭脷赂脙脰脺脝脷路垄脡煤卤盲禄炉
-
+	//判断是否有安检口开放关闭状态在该周期发生变化
+	 
 	if(i)
-        output_after_close(re);
-	//脠么脫脨卤盲禄炉拢卢脭貌脢盲鲁枚
+	output_after_close(re);
+	//若有变化，则输出 
 }
-//赂脙潞炉脢媒脫脙脫脷露炉脤卢驴陋路脜鹿脴卤脮掳虏录矛驴脷
+//该函数用于动态开放关闭安检口
 
-
+ 
 
 void buffer_to_checkpoint()
 {
-	int min=6;				//min鲁玫脢录禄炉脦陋6拢卢麓煤卤铆脠脣脢媒脳卯脡脵碌脛掳虏录矛驴脷碌脛脠脣脢媒
-	int c;					//c脦陋录脝脢媒脝梅
-	int i=0;				//i脫脙脫脷脜脨露脧脢脟路帽脨猫脪陋陆芦鲁脣驴脥路脰脜盲碌陆掳虏录矛驴脷
-	int t=1;				//t麓煤卤铆脠脣脢媒脳卯脡脵碌脛掳虏录矛驴脷卤脿潞脜
-
+	int min=6;				//min初始化为6，代表人数最少的安检口的人数 
+	int c;					//c为计数器 
+	int i=0;				//i用于判断是否需要将乘客分配到安检口 
+	int t=1;				//t代表人数最少的安检口编号
+	 
 	while(bff.people!=0){
 		for(c=1,i=0;c<=8;c++){
 			if((cp[c].state==1||cp[c].state==2)&&(cp[c].people<6)){
@@ -63,12 +63,12 @@ void buffer_to_checkpoint()
 				break;
 			}
 		}
-		//碌脙碌陆i碌脛脰碌
-
+		//得到i的值
+		 
 		if(i==0)
 		break;
-		//脠么i脦陋0拢卢脭貌脤酶鲁枚脩颅禄路拢卢脥拢脰鹿路脰脜盲
-
+		//若i为0，则跳出循环，停止分配
+		 
 		for(c=1;c<=8;c++){
 			if(cp[c].state==1||cp[c].state==2){
 				if(cp[c].people<min){
@@ -80,9 +80,10 @@ void buffer_to_checkpoint()
 		min=6;
 		bff.people--;
 		cp[t].people++;
-		//陆芦鲁脣驴脥路脰脜盲碌陆脠脣脢媒脳卯脡脵碌脛掳虏录矛驴脷
+		//将乘客分配到人数最少的安检口 
 	}
 }
-//赂脙潞炉脢媒脫脙脫脷陆芦鲁脣驴脥麓脫禄潞鲁氓脟酶路脰脜盲碌陆掳虏录矛驴脷
-//路脰脜盲虏脽脗脭脦陋脫脜脧脠陆芦鲁脣驴脥路脰脜盲碌陆脠脣脢媒脡脵碌脛掳虏录矛驴脷
+//该函数用于将乘客从缓冲区分配到安检口
+//分配策略为优先将乘客分配到人数少的安检口
+ 
 

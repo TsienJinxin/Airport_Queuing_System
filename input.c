@@ -5,9 +5,9 @@
 
 extern FILE* fptr;
 
-void getConfig()
+void getConfig()    
 {
-	char ch;      //脳脰路没脨脥卤盲脕驴ch麓忙麓垄脢盲脠毛碌脛脩隆脭帽脢盲脠毛脜盲脰脙路陆脢陆碌脛脙眉脕卯
+	char ch;      //字符型变量ch存储输入的选择输入配置方式的命令 
 	printf("Which way would you like to input the config?\nK means input by keyboard and F means input by file\n");
 	fputs("Which way would you like to input the config?\nK means input by keyboard and F means input by file\n",fptr);
 	scanf("%c",&ch);
@@ -20,41 +20,41 @@ void getConfig()
 			fputs("Please input the MaxCustSingleLine\n",fptr);
 			scanf("%d",&MaxCustSingleLine);
 			fprintf(fptr,"%d\n",MaxCustSingleLine);
-
+		
 			printf("Please input the MaxLines\n");
 			fputs("Please input the MaxLines\n",fptr);
 			scanf("%d",&MaxLines);
 			fprintf(fptr,"%d\n",MaxLines);
-
+			
 			printf("Please input the MaxSeqLen\n");
 			fputs("Please input the MaxSeqLen\n",fptr);
 			scanf("%d",&MaxSeqLen);
 		 	fprintf(fptr,"%d\n",MaxSeqLen);
-
+		 				
 			printf("Please input the MinTimeLen\n");
 			fputs("Please input the MinTimeLen\n",fptr);
 			scanf("%d",&MinTimeLen);
 			fprintf(fptr,"%d\n",MinTimeLen);
-
+					
 			printf("Please input the MaxTimeLen\n");
 			fputs("Please input the MaxTimeLen\n",fptr);
 			scanf("%d",&MaxTimeLen);
 			fprintf(fptr,"%d\n",MaxTimeLen);
-
+						
 			printf("Please input the MinRestTimeLen\n");
 			fputs("Please input the MinRestTimeLen\n",fptr);
 			scanf("%d",&MinRestTimeLen);
 			fprintf(fptr,"%d\n",MinRestTimeLen);
-
+					
 			printf("Please input the MaxRestTimeLen\n");
 			fputs("Please input the MaxRestTimeLen\n",fptr);
 			scanf("%d",&MaxRestTimeLen);
 			fprintf(fptr,"%d\n",MaxRestTimeLen);
-
-			break;
+						
+			break; 
 		}
-		//脩隆脭帽录眉脜脤脢盲脠毛脢卤露脭脜盲脰脙脦脛录镁脢盲脠毛碌脛麓娄脌铆
-
+		//选择键盘输入时对配置文件输入的处理
+		 
 		else if(ch=='F'||ch=='f') {
 			int count;
 			int temp[7];
@@ -66,27 +66,27 @@ void getConfig()
 				sscanf(a,"%*[^0-9]%[0-9]",b);
 				sscanf(b,"%d",&temp[count]);
 			}
-			MaxCustSingleLine=temp[0];      //碌楼露脫脕脨脳卯麓贸碌脠麓媒鲁脣驴脥脢媒
-			MaxLines=temp[1];              //脡脽脨脦禄潞鲁氓脟酶脳卯露脿脫脡MaxLines赂枚脰卤露脫脳茅鲁脡
-			MaxSeqLen=temp[2];            //脳卯麓贸脭脢脨铆碌脠麓媒鲁陇露脠
-			MinTimeLen=temp[3];           //脪禄麓脦掳虏录矛脳卯露脤脢卤鲁陇拢卢碌楼脦禄脦陋脙毛
-			MaxTimeLen=temp[4];          //脪禄麓脦掳虏录矛脳卯麓贸脢卤鲁陇拢卢碌楼脦禄脦陋脙毛
-			MinRestTimeLen=temp[5];       //掳虏录矛驴脷脪禄麓脦脭脻脥拢脨脻脧垄脳卯露脤脢卤鲁陇拢卢碌楼脦禄脦陋脙毛
-			MaxRestTimeLen=temp[6];      //掳虏录矛驴脷脪禄麓脦脭脻脥拢脨脻脧垄脳卯麓贸脢卤鲁陇拢卢碌楼脦禄脦陋脙毛
-
-			break;
+			MaxCustSingleLine=temp[0];      //单队列最大等待乘客数
+			MaxLines=temp[1];              //蛇形缓冲区最多由MaxLines个直队组成
+			MaxSeqLen=temp[2];            //最大允许等待长度
+			MinTimeLen=temp[3];           //一次安检最短时长，单位为秒
+			MaxTimeLen=temp[4];          //一次安检最大时长，单位为秒
+			MinRestTimeLen=temp[5];       //安检口一次暂停休息最短时长，单位为秒
+			MaxRestTimeLen=temp[6];      //安检口一次暂停休息最大时长，单位为秒
+			
+			break; 
 		}
-		//脩隆脭帽脦脛录镁脢盲脠毛脢卤露脭脜盲脰脙脦脛录镁碌脛麓娄脌铆
-
+		//选择文件输入时对配置文件的处理
+		 
 		else{
 			printf("Please input 'k' or 'f'\n");
 			scanf("%c",&ch);
-			getchar();
+			getchar(); 
 		}
-		//麓铆脦贸脢盲脠毛脢卤脰脴脨脗脢盲脠毛脙眉脕卯拢卢脭脵脳枚麓娄脌铆
+		//错误输入时重新输入命令，再做处理 
 	}
-
-
+	
+	
 	printf("Here are the results.\n");
 	printf("MaxCustSingleLine=%d\n",MaxCustSingleLine);
 	printf("MaxLines=%d\n",MaxLines);
@@ -95,7 +95,7 @@ void getConfig()
 	printf("MaxTimeLen=%d\n",MaxTimeLen);
 	printf("MinRestTimeLen=%d\n",MinRestTimeLen);
 	printf("MaxRestTimeLen=%d\n",MaxRestTimeLen);
-
+	
 	fputs("Here are the results.\n",fptr);
 	fprintf(fptr,"MaxCustSingleLine=%d\n",MaxCustSingleLine);
 	fprintf(fptr,"MaxLines=%d\n",MaxLines);
@@ -105,21 +105,22 @@ void getConfig()
 	fprintf(fptr,"MinRestTimeLen=%d\n",MinRestTimeLen);
 	fprintf(fptr,"MaxRestTimeLen=%d\n",MaxRestTimeLen);
 	fputs("\n\n",fptr);
-	//脢盲鲁枚脜盲脰脙脦脛录镁碌脛脢盲脠毛陆谩鹿没
+	//输出配置文件的输入结果 
 }
-//getConfig脫脙脫脷禄帽脠隆脜盲脰脙脦脛录镁
-
+//getConfig用于获取配置文件
+ 
 
 void getCommand()
 {
 	while(1){
-	char order[1000];						//脳脰路没脨脥脢媒脳茅order麓忙麓垄脢盲脠毛碌脛脙眉脕卯录炉潞脧
-	memset(order,0,sizeof(order));			//鲁玫脢录禄炉脢媒脳茅order
+	char order[1000];						//字符型数组order存储输入的命令集合 
+	memset(order,0,sizeof(order));			//初始化数组order 
 	gets(order);
 	fputs(order,fptr);
 	fputs("\n",fptr);
-	choose_command(order);			//碌梅脫脙choose_command潞炉脢媒拢卢露脭脢盲脠毛碌脛脙眉脕卯陆酶脨脨脧脿脫娄碌脛麓娄脌铆
-	}
+	choose_command(order);			//调用choose_command函数，对输入的命令进行相应的处理 
+	}		
 }
-//getCommand脫脙脫脷禄帽脠隆脙眉脕卯虏垄陆酶脨脨陆酶脪禄虏陆碌脛脧脿脫娄麓娄脌铆
+//getCommand用于获取命令并进行进一步的相应处理 
+
 

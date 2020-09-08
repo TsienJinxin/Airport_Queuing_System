@@ -5,7 +5,7 @@
 
 void initialize()
 {
-	int c;   //脮没脨脥卤盲脕驴c脦陋录脝脢媒脝梅拢卢脭脷脩颅禄路脰脨脢鹿脫脙
+	int c;   //整型变量c为计数器，在循环中使用 
 	for(c=1;c<=4;c++){
 		cp[c].people=0;
 		cp[c].state=1;
@@ -16,8 +16,8 @@ void initialize()
 		cp[c].sum_already_restTime=0;
 		cp[c].ask_for_rest_current_time=0;
 	}
-	//鲁玫脢录禄炉1-4潞脜掳虏录矛驴脷碌脛脨脜脧垄拢卢脝盲脳麓脤卢脦陋驴脮脧脨
-
+	//初始化1-4号安检口的信息，其状态为空闲 
+	
 	for(;c<=8;c++){
 		cp[c].people=0;
 		cp[c].state=5;
@@ -28,20 +28,20 @@ void initialize()
 		cp[c].sum_already_restTime=0;
 		cp[c].ask_for_rest_current_time=0;
 	}
-	//鲁玫脢录禄炉1-4潞脜掳虏录矛驴脷碌脛脨脜脧垄拢卢脝盲脳麓脤卢脦陋鹿脴卤脮
-
+	//初始化1-4号安检口的信息，其状态为关闭
+	
 	bff.people=0;
 	bff.isfull=0;
-	//鲁玫脢录禄炉禄潞鲁氓脟酶脨脜脧垄
-
+	//初始化缓冲区信息 
+	
 	isOnDuty=1;
-	//鲁玫脢录禄炉脠芦戮脰卤盲脕驴脢脟路帽麓娄脫脷脡脧掳脿脳麓脤卢脦陋1拢卢录麓麓娄脫脷脡脧掳脿脳麓脤卢
-
+	//初始化全局变量是否处于上班状态为1，即处于上班状态
+	
 	srand((int)time(NULL));
-	//鲁玫脢录禄炉脣忙禄煤脢媒脰脰脳脫
-
+	//初始化随机数种子
+	 
 	start_time=clock();
-	//鲁玫脢录禄炉鲁脤脨貌驴陋脢录脢卤录盲
-
-
-}
+	//初始化程序开始时间 
+	
+	
+} 

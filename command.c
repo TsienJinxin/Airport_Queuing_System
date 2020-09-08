@@ -2,19 +2,18 @@
 #include <string.h>
 #include <time.h>
 #include "model.h"
-#include "output.h"
 
 
 extern FILE* fptr;
 
 int command_G()
 {
-	if(isOnDuty==1){
+	if(isOnDuty==1){		
 		if(bff.people == MaxCustSingleLine*MaxLines){
 			bff.isfull=1;
 		}
-		//脠莽鹿没禄潞鲁氓脟酶脠脣脢媒碌脠脫脷 MaxCustSingleLine*MaxLines拢卢脭貌禄潞鲁氓脟酶脪脩脗煤
-
+		//如果缓冲区人数等于 MaxCustSingleLine*MaxLines，则缓冲区已满
+		 
 		else{
 			bff.isfull=0;
 		}
@@ -22,99 +21,99 @@ int command_G()
 			bff.people=bff.people+1;
 			return 1;
 		}
-		//脠莽鹿没碌卤脟掳禄潞鲁氓脟酶脦麓脗煤拢卢脭貌鲁脣驴脥鲁脡鹿娄陆酶脠毛
-
-		else
+		//如果当前缓冲区未满，则乘客成功进入 
+		
+		else 
 		return 0;
-		//脠莽鹿没碌卤脟掳禄潞鲁氓脟酶脪脩脗煤拢卢脭貌鲁脣驴脥陆酶脠毛脢搂掳脺
-
+		//如果当前缓冲区已满，则乘客进入失败 
+		
 
 	}
-	//碌卤脟掳脦陋脧脗掳脿脢卤拢卢露脭 鲁脣驴脥陆酶脠毛禄潞鲁氓脟酶碌脛脙眉脕卯碌脛麓娄脌铆
-
+	//当前为下班时，对 乘客进入缓冲区的命令的处理
+	 
 	else
 	return 2;
-	//脠莽鹿没碌卤脟掳麓娄脫脷脧脗掳脿脳麓脤卢拢卢脭貌鲁脣驴脥陆酶脠毛脢搂掳脺
-}
-//露脭G脙眉脕卯录麓鲁脣驴脥陆酶脠毛禄潞鲁氓脟酶碌脛脙眉脕卯陆酶脨脨麓娄脌铆
+	//如果当前处于下班状态，则乘客进入失败 
+} 
+//对G命令即乘客进入缓冲区的命令进行处理 
 
 
 void command_R(int window){
 	if(cp[window].state==1||cp[window].state==2){
-		cp[window].state=4;				//脡锚脟毛陆酶脠毛脨脻脧垄脳麓脤卢碌脛麓掳驴脷陆酶脠毛脡锚脟毛脨脻脧垄脳麓脤卢
-
-    	cp[window].ask_for_rest_current_time=(double)(clock()-start_time)/CLOCKS_PER_SEC;//录脟脗录脡锚脟毛脨脻脧垄碌脛脢卤录盲
+		cp[window].state=4;				//申请进入休息状态的窗口进入申请休息状态 
+		
+    	cp[window].ask_for_rest_current_time=(double)(clock()-start_time)/CLOCKS_PER_SEC;//记录申请休息的时间
 	}
     else{
     	printf("Check point %d can't rest.\n",window);
     	fprintf(fptr,"Check point %d can't rest.\n",window);
 	}
-	//脦脼路篓陆酶脠毛脨脻脧垄脳麓脤卢碌脛麓掳驴脷路垄鲁枚脡锚脟毛脨脻脧垄脙眉脕卯脢卤拢卢禄谩赂酶脫猫麓铆脦贸脤谩脢戮
+	//无法进入休息状态的窗口发出申请休息命令时，会给予错误提示 
 }
-//露脭禄潞鲁氓脟酶脡锚脟毛脨脻脧垄脙眉脕卯碌脛麓娄脌铆
+//对缓冲区申请休息命令的处理
+ 
 
-
-void command_C (int window)  //掳麓脮脮禄帽碌脙碌脛脙眉脕卯陆酶脨脨麓掳驴脷禄脰赂麓鹿陇脳梅碌脛脪陋脟贸
+void command_C (int window)  //按照获得的命令进行窗口恢复工作的要求
 {
 	if(cp[window].state==3){
-    	cp[window].state=1;       				//禄脰赂麓鹿陇脳梅脳麓脤卢
-    	cp[window].already_restTime=0;
-    	cp[window].need_rest_time=0;			//脳麓脤卢禄脰赂麓
+    	cp[window].state=1;       				//恢复工作状态
+    	cp[window].already_restTime=0; 				
+    	cp[window].need_rest_time=0;			//状态恢复 
 	}
-	//脠么掳虏录矛驴脷脪脩戮颅麓娄脫脷脨脻脧垄脳麓脤卢
+	//若安检口已经处于休息状态 
 	else if(cp[window].state==6){
-		cp[window].state=2;       				//禄脰赂麓鹿陇脳梅脳麓脤卢
-    	cp[window].already_restTime=0;
+		cp[window].state=2;       				//恢复工作状态
+    	cp[window].already_restTime=0; 				
     	cp[window].need_rest_time=0;
-	}
-	//脠么掳虏录矛驴脷脮媒脭脷脳录卤赂脨脻脧垄
+	} 
+	//若安检口正在准备休息 
     else{
     	printf("Check point %d isn't resting now.\n",window);
     	fprintf(fptr,"Check point %d isn't resting now.\n",window);
 	}
-	//路脟脨脻脧垄脳麓脤卢麓掳驴脷脡锚脟毛禄脰赂麓脨脻脧垄脢卤赂酶脫猫麓铆脦贸脤谩脢戮
+	//非休息状态窗口申请恢复休息时给予错误提示 
 }
-//露脭禄潞鲁氓脟酶脡锚脟毛禄脰赂麓鹿陇脳梅脙眉脕卯碌脛麓娄脌铆
+//对缓冲区申请恢复工作命令的处理
 
-void command_Q ()           //掳麓脮脮禄帽碌脙碌脛脙眉脕卯陆酶脨脨戮枚露篓脧脗掳脿碌脛脪陋脟贸
+void command_Q ()           //按照获得的命令进行决定下班的要求
 {
 	if(isOnDuty)
-    	isOnDuty=0;				 //陆酶脠毛脧脗掳脿脳麓脤卢
+    	isOnDuty=0;				 //进入下班状态  
     else{
     	printf("It's already off duty now.\n");
     	fprintf(fptr,"It's already off duty now.\n");
-	}
-	//脠么脪脩路垄鲁枚脕脣脧脗掳脿脰赂脕卯拢卢脭貌赂酶脫猫麓铆脦贸脤谩脢戮
+	} 
+	//若已发出了下班指令，则给予错误提示 
 }
-//露脭脧脗掳脿脙眉脕卯碌脛麓娄脌铆
+//对下班命令的处理 
 
 void choose_command(char order[]){
-	int c;			//录脝脢媒脝梅拢卢脫脙脫脷脩颅禄路脰脨
-	int re;
-	//脦陋路脌脰鹿脰脴赂麓脪媒脫脙潞炉脢媒 command_G(),脢鹿脫脙脮没脨脦卤盲脕驴re
-	//re碌脛脰碌脦陋command_G()碌脛路碌禄脴脰碌拢卢赂霉戮脻re碌脛脰碌碌脛虏禄脥卢拢卢脳枚鲁枚脧脿脫娄虏禄脥卢碌脛脢盲鲁枚脳麓脤卢卤盲禄炉
-
+	int c;			//计数器，用于循环中 
+	int re;			
+	//为防止重复引用函数 command_G(),使用整形变量re 
+	//re的值为command_G()的返回值，根据re的值的不同，做出相应不同的输出状态变化
+	 
 	int order_g[3]={0,0,0};
-	//order_g[3]脢媒脳茅麓煤卤铆鲁脣驴脥陆酶脠毛掳虏录矛驴脷碌脛陆谩鹿没
-	//order_g[0]麓煤卤铆脪貌禄潞鲁氓脟酶脠脣脗煤露酶陆酶脠毛脢搂掳脺碌脛脠脣脢媒拢卢order_g[1]麓煤卤铆陆酶脠毛鲁脡鹿娄碌脛脠脣脢媒拢卢order[2]麓煤卤铆脪貌麓娄脫脷脧脗掳脿脳麓脤卢露酶陆酶脠毛脢搂掳脺碌脛脠脣脢媒
-
+	//order_g[3]数组代表乘客进入安检口的结果
+	//order_g[0]代表因缓冲区人满而进入失败的人数，order_g[1]代表进入成功的人数，order[2]代表因处于下班状态而进入失败的人数 
+	
 	int order_r[9];
-	//order_r[9]脢媒脳茅麓煤卤铆掳虏录矛驴脷脢脟路帽脫脨脡锚脟毛脨脻脧垄
-	//order_r[n]=0麓煤卤铆掳虏录矛驴脷n脦麓脡锚脟毛脨脻脧垄拢卢order_r[n]=1麓煤卤铆掳虏录矛驴脷n脡锚脟毛脨脻脧垄
-
+	//order_r[9]数组代表安检口是否有申请休息
+	//order_r[n]=0代表安检口n未申请休息，order_r[n]=1代表安检口n申请休息
+	
 	int order_c[9];
-	//order_c[9]脢媒脳茅麓煤卤铆掳虏录矛驴脷脢脟路帽脫脨脡锚脟毛禄脰赂麓鹿陇脳梅
-	//order_c[n]=0麓煤卤铆掳虏录矛驴脷n脦麓脡锚脟毛禄脰赂麓鹿陇脳梅拢卢order_c[n]=1麓煤卤铆掳虏录矛驴脷n脡锚脟毛禄脰赂麓鹿陇脳梅
-
+	//order_c[9]数组代表安检口是否有申请恢复工作
+	//order_c[n]=0代表安检口n未申请恢复工作，order_c[n]=1代表安检口n申请恢复工作 
+	
 	int order_q=0;
-	//order_q=0麓煤卤铆脦麓路垄鲁枚脧脗掳脿脙眉脕卯隆拢order_q=1麓煤卤铆路垄鲁枚脕脣脧脗掳脿脙眉脕卯
-
+	//order_q=0代表未发出下班命令。order_q=1代表发出了下班命令
+	
 	int mistake=0;
-	//mistake脫脙脫脷录脟脗录脢盲脠毛碌脛脙眉脕卯脰脨脢脟路帽脫脨麓铆脦贸脨脜脧垄拢卢脠么脫脨拢卢脭貌mistake碌脛脰碌脦陋1
+	//mistake用于记录输入的命令中是否有错误信息，若有，则mistake的值为1 
 	memset(order_c,0,sizeof(order_r));
 	memset(order_r,0,sizeof(order_c));
-	//鲁玫脢录禄炉order_c录掳order_r脢媒脳茅
-
+	//初始化order_c及order_r数组
+	 
 	for(c=0;order[c]!='\0';c++){
 		switch(order[c]){
 			case 'G':
@@ -142,15 +141,16 @@ void choose_command(char order[]){
 				break;
 			default :
 				mistake=1;
-				break;
+				break; 
 		}
 	}
-	//赂霉戮脻脢盲脠毛脙眉脕卯碌脛虏禄脥卢脳枚鲁枚脧脿脫娄碌脛虏脵脳梅虏垄脟脪录脟脗录脧脿脫娄碌脛虏脵脳梅陆谩鹿没
-
+	//根据输入命令的不同做出相应的操作并且记录相应的操作结果 
+	
 	output_after_state_change(order_g,order_r,order_c,order_q);
-	//露脭脳麓脤卢碌脛卤盲禄炉陆酶脨脨脧脿脫娄碌脛脢盲鲁枚
+	//对状态的变化进行相应的输出 
 	if(mistake){
 		printf("Something in your order isn't right,and we only handle the right part.\n");
 		fprintf(fptr,"Something in your order isn't right,and we only handle the right part.\n");
-	}
+	} 
 }
+
